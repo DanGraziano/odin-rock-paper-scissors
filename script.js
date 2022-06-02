@@ -60,7 +60,6 @@ function playRound (playerSelection, computerSelection) {
 
 }
 
-console.log(computerPlay())
 console.log(computerSelection)
 console.log(playerSelection)
 console.log(playRound(playerSelection, computerSelection));
