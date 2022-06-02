@@ -11,4 +11,14 @@ function computerPlay() {
 
 }
 
+function playerInput (playerInput, input) {
+    playerInput = prompt("Rock, Paper, or Scissors");
+    lowerCaseInput = playerInput.toLocaleLowerCase();
+    return(lowerCaseInput);
+
+}
+
+const computerSelection = computerPlay();
+const playerSelection = playerInput();
+
 
