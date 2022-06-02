@@ -1,7 +1,7 @@
 //Computer picks a Rock, Paper, or Scissors at random
 
 function computerPlay() {
-    let compPlay = ["Rock", "Paper", "Scissors"];
+    let compPlay = ["rock", "paper", "scissors"];
     let randomNumber = Math.floor(Math.random() * compPlay.length);
     let randomSelection = compPlay[randomNumber];
     return randomSelection;
@@ -28,27 +28,27 @@ function playRound (playerSelection, computerSelection) {
         roundWinner = `You both selected ${playerSelection}. It's a tie`
     }
     
-    else if (playerSelection == "rock" && computerSelection == "Scissors") {
+    else if (playerSelection == "rock" && computerSelection == "scissors") {
         roundWinner = "You win! Rock beats Scissors!";
     }
 
-    else if (playerSelection == "rock" && computerSelection == "Paper") {
+    else if (playerSelection == "rock" && computerSelection == "paper") {
         roundWinner = "You lose! Paper beats Rock!";
     }
 
-    else if (playerSelection == "paper" && computerSelection == "Rock") {
+    else if (playerSelection == "paper" && computerSelection == "rock") {
         roundWinner = "You win! Paper beats Rock!";
     }
 
-    else if (playerSelection == "paper" && computerSelection == "Scissors") {
+    else if (playerSelection == "paper" && computerSelection == "scissors") {
         roundWinner = "You lose! Scissors beats Paper!";
     }
 
-    else if (playerSelection == "scissors" && computerSelection == "Paper") {
+    else if (playerSelection == "scissors" && computerSelection == "paper") {
         roundWinner = "You win! Scissors beats Paper!";
     }
 
-    else if (playerSelection == "scissors" && computerSelection == "Rock") {
+    else if (playerSelection == "scissors" && computerSelection == "rock") {
         roundWinner = "You lose! Rock beats Scissors!";
     }
 
