@@ -1,8 +1,3 @@
-// Rock beats scissors
-// Paper beats rock
-// Scissors beats paper
-
-
 function computerPlay() {
     let selection = ["Rock", "Paper", "Scissors"];
     let randomNumber = Math.floor(Math.random() * selection.length);
@@ -11,14 +6,15 @@ function computerPlay() {
 
 }
 
-function playerSelection (playerInput, input) {
+function playerInput (playerInput, input) {
     playerInput = prompt("Rock, Paper, or Scissors");
-    input = playerInput.toLocaleLowerCase();
-    return(input);
+    lowerCaseInput = playerInput.toLocaleLowerCase();
+    return(lowerCaseInput);
 
 }
 
 const computerSelection = computerPlay();
+const playerSelection = playerInput();
 
 function playRound (playerSelection, computerSelection) {
     roundWinner = " ";
@@ -52,8 +48,9 @@ function playRound (playerSelection, computerSelection) {
     }
 
     else (roundWinner = "Something went wrong. Try again") 
+    
     return roundWinner;
 
 }
 
-console.log(playRound(playerSelection(), computerSelection));
+console.log(playRound(playerSelection, computerSelection));
