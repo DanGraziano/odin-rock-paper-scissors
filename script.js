@@ -9,14 +9,23 @@ function computerPlay() {
 
 // User is asked to enter in Rock, Paper, or Scissors. Input is then converted to lowercase
 // While loop prompts user again if the box is closed without making a choice
+/* Trying to add if statement that will prompt the user again if proper selection isn't made. It works for rock but having issues with paper and scissors
+if (lowerCaseInput != ["rock" || "paper" || "scissors"]) {
+    return prompt("You must choose either Rock, Paper, or Scissors");
+}  
+    else {
+        return(lowerCaseInput);
+}
+*/
 
 function playerInput (playerInput, lowerCaseInput) {
-    playerInput = prompt("Select either Rock, Paper, or Scissors");
+    playerInput = prompt("Choose either Rock, Paper, or Scissors");
     while (playerInput == null) {
-        playerInput = prompt("Select either Rock, Paper, or Scissors"); 
+        playerInput = prompt("Choose either Rock, Paper, or Scissors"); 
     }
     lowerCaseInput = playerInput.toLowerCase();
     return(lowerCaseInput);
+
 }
 
 // Computer's move is stored in a constant. User's input is stored in a second constant
@@ -81,11 +90,11 @@ function game () {
             console.log(roundResult + ` The score is: ${playerPoints} to ${computerPoints}`);
         }   
         else if (roundResult.includes("tie")){
-            
             console.log(roundResult + ` The score is still: ${playerPoints} to ${computerPoints}`);
         } 
         else {
-            console.log ("Something went wrong. Please try again.");
+            i -= 1
+            console.log(`This round didn't count because you didn't make a proper selection. The score is still: ${playerPoints} to ${computerPoints}`);
         }
     }
 
