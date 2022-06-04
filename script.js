@@ -8,6 +8,7 @@ function computerPlay() {
 }
 
 // User is asked to enter in Rock, Paper, or Scissors. Input is then converted to lowercase
+// While loop prompts user again if the box is closed without making a choice
 
 function playerInput (playerInput, lowerCaseInput) {
     playerInput = prompt("Select either Rock, Paper, or Scissors");
@@ -23,11 +24,11 @@ function playerInput (playerInput, lowerCaseInput) {
 const playerSelection = playerInput();
 const computerSelection = computerPlay();
 
-// Function for the first round with an if and else if statement based on user and comp selection
+// Function for the first round with an if statement based on user and comp selection
 
 function playRound (playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
-        return `You both selected ${playerSelection}. It's a tie`
+        return `You both selected ${playerSelection}. It's a tie.`
     }
     
     else if (playerSelection == "rock" && computerSelection == "scissors") {
@@ -55,48 +56,51 @@ function playRound (playerSelection, computerSelection) {
     }
 
     else {
-        return "Something went wrong. Please try again";
+        return "Something went wrong. Please try again.";
     }
 
 }
 
-console.log(playRound(playerSelection, computerSelection));
+// A function for a game that is five rounds 
+// The player and computer start with 0 points and gain 1 point for each win
+// The for loop will loop the game for 5 rounds
 
-// Call the playRound function inside of this one to play a 5 round game that keeps score and reports a winner or loser at the end.
-// Play round one. If player wins he gets a point. If computer wins it gets a point. 
-// Play round two - Prompt user for selection again and then repeat with new scores
-
-// When play wins add one and loop until 5
-// When computer wins add one and loop until 5
-
-
-function game() {
-    
-    playerPoints = 0
-    computerPoints = 0
-    roundResult = playRound(playerSelection, computerSelection);
+function game () {
+    let playerPoints = 0;
+    let computerPoints = 0;
     for (let i = 0; i < 5; i++) {
+        let computerTurn = computerPlay();
+        let playerTurn = playerInput();
+        let roundResult = playRound(playerTurn, computerTurn);
         if (roundResult.includes("You win")) {
             playerPoints += 1;
+            console.log(roundResult + ` The score is: ${playerPoints} to ${computerPoints}`);
         }
-
         else if (roundResult.includes("You lose")) {
             computerPoints += 1;
-            console.log(roundResult + `The score is: ${playerPoints} to ${computerPoints}`);
+            console.log(roundResult + ` The score is: ${playerPoints} to ${computerPoints}`);
         }   
-        else {
+        else if (roundResult.includes("tie")){
             
-            console.log(roundResult + `The score is: ${playerPoints} to ${computerPoints}`);
+            console.log(roundResult + ` The score is still: ${playerPoints} to ${computerPoints}`);
         } 
+        else {
+            console.log ("Something went wrong. Please try again.");
+        }
     }
 
     if (playerPoints > computerPoints) {
-        console.log("You won the game! " + playerPoints + " to " + computerPoints + "!");
+        console.log(`Congrats! You won the game! The final score is ${playerPoints} to ${computerPoints}!`);
       } 
-      
-    else {
-        console.log("You lost the game! " + computerPoints + " to " + playerPoints + "!");
+    
+    else if (playerPoints < computerPoints) {
+        console.log(`Oh no! Looks like you lost the game! The final score is ${playerPoints} to ${computerPoints}!`);
     }
 
-
+    else {
+        console.log(`Looks like it's a tie! The final score is ${playerPoints} to ${computerPoints}!`);
+        
+    }
 }
+
+game()
