@@ -1,0 +1,57 @@
+body {
+    background-color: beige;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+img {
+    height: 200px;
+}
+
+h4 {
+    text-align: center;
+}
+
+#rules {
+    display: table;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    padding: 5px;
+}
+
+#container {
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+}
+
+button {
+    width: 300px
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+#results {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    font-weight: bolder
+
+}
+
+#replay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+
+}
+
+#playAgain {
+    width: 100px;
+}

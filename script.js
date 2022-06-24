@@ -1,4 +1,35 @@
-//Computer picks a Rock, Paper, or Scissors at random
+const results = document.getElementById("results");
+let playerPoints = 0;
+let computerPoints = 0;
+document.getElementById("playAgain").style.display="none";
+
+// User selection via button click
+
+const rock = document.querySelector("#rock");
+    rock.addEventListener('click', () => {
+    playerSelection = "rock";
+    results.innerHTML = playGame(playerSelection, computerPlay());
+    winnerAlert()
+    gameOver()
+    });
+
+const paper = document.querySelector("#paper");
+    paper.addEventListener('click', () => {
+    playerSelection = "paper";
+    results.innerHTML = playGame(playerSelection, computerPlay());
+    winnerAlert()
+    gameOver()
+    });
+
+const scissors = document.querySelector("#scissors");
+    scissors.addEventListener('click', () => {
+    playerSelection = "scissors"
+    results.innerHTML = playGame(playerSelection, computerPlay());
+    winnerAlert()
+    gameOver()
+    });
+
+// Computer randomly selects Rock, Paper, or Scissors
 
 function computerPlay() {
     let compPlay = ["rock", "paper", "scissors"];
@@ -7,109 +38,74 @@ function computerPlay() {
     return randomSelection;
 }
 
-// User is asked to enter in Rock, Paper, or Scissors. Input is then converted to lowercase
-// While loop prompts user again if the box is closed without making a choice
-/* Trying to add if statement that will prompt the user again if proper selection isn't made. It works for rock but having issues with paper and scissors
-if (lowerCaseInput != ["rock" || "paper" || "scissors"]) {
-    return prompt("You must choose either Rock, Paper, or Scissors");
-}  
-    else {
-        return(lowerCaseInput);
-}
-*/
+// Game results 
 
-function playerInput (playerInput, lowerCaseInput) {
-    playerInput = prompt("Choose either Rock, Paper, or Scissors");
-    while (playerInput == null) {
-        playerInput = prompt("Choose either Rock, Paper, or Scissors"); 
-    }
-    lowerCaseInput = playerInput.toLowerCase();
-    return(lowerCaseInput);
-
-}
-
-// Computer's move is stored in a constant. User's input is stored in a second constant
-
-const playerSelection = playerInput();
-const computerSelection = computerPlay();
-
-// Function for the first round with an if statement based on user and comp selection
-
-function playRound (playerSelection, computerSelection) {
+function playGame (playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
-        return `You both selected ${playerSelection}. It's a tie.`
+        return `You both selected ${playerSelection}. It's a tie. The score is still: ${playerPoints} to ${computerPoints}`
     }
     
     else if (playerSelection == "rock" && computerSelection == "scissors") {
-        return "You win! Rock beats Scissors!";
+        playerPoints += 1;
+        return `You win! Rock beats Scissors! The score is: ${playerPoints} to ${computerPoints}`;
     }
 
     else if (playerSelection == "rock" && computerSelection == "paper") {
-        return "You lose! Paper beats Rock!";
+        computerPoints += 1;
+        return `You lose! Paper beats Rock! The score is: ${playerPoints} to ${computerPoints}`;
     }
 
     else if (playerSelection == "paper" && computerSelection == "rock") {
-        return "You win! Paper beats Rock!";
+        playerPoints += 1;
+        return `You win! Paper beats Rock! The score is: ${playerPoints} to ${computerPoints}`;
     }
 
     else if (playerSelection == "paper" && computerSelection == "scissors") {
-        return "You lose! Scissors beats Paper!";
+        computerPoints += 1;
+        return `You lose! Scissors beats Paper! The score is: ${playerPoints} to ${computerPoints}`;
     }
 
     else if (playerSelection == "scissors" && computerSelection == "paper") {
-        return "You win! Scissors beats Paper!";
+        playerPoints += 1;
+        return `You win! Scissors beats Paper! The score is: ${playerPoints} to ${computerPoints}`;
     }
 
     else if (playerSelection == "scissors" && computerSelection == "rock") {
-        return "You lose! Rock beats Scissors!";
-    }
-
-    else {
-        return "Something went wrong. Please try again.";
+        computerPoints += 1;
+        return `You lose! Rock beats Scissors! The score is: ${playerPoints} to ${computerPoints}`;
     }
 
 }
 
-// A function for a game that is five rounds 
-// The player and computer start with 0 points and gain 1 point for each win
-// The for loop will loop the game for 5 rounds
+// Announce winner
 
-function game () {
-    let playerPoints = 0;
-    let computerPoints = 0;
-    for (let i = 0; i < 5; i++) {
-        let computerTurn = computerPlay();
-        let playerTurn = playerInput();
-        let roundResult = playRound(playerTurn, computerTurn);
-        if (roundResult.includes("You win")) {
-            playerPoints += 1;
-            console.log(roundResult + ` The score is: ${playerPoints} to ${computerPoints}`);
-        }
-        else if (roundResult.includes("You lose")) {
-            computerPoints += 1;
-            console.log(roundResult + ` The score is: ${playerPoints} to ${computerPoints}`);
-        }   
-        else if (roundResult.includes("tie")){
-            console.log(roundResult + ` The score is still: ${playerPoints} to ${computerPoints}`);
-        } 
-        else {
-            i -= 1
-            console.log(`This round didn't count because you didn't make a proper selection. The score is still: ${playerPoints} to ${computerPoints}`);
-        }
-    }
+function winnerAlert() {
+    if (playerPoints == 5 && playerPoints > computerPoints) {
+        results.innerText = (`Congrats! You won the game! The final score is ${playerPoints} to ${computerPoints}!`);
+     } 
 
-    if (playerPoints > computerPoints) {
-        console.log(`Congrats! You won the game! The final score is ${playerPoints} to ${computerPoints}!`);
-      } 
-    
-    else if (playerPoints < computerPoints) {
-        console.log(`Oh no! Looks like you lost the game! The final score is ${playerPoints} to ${computerPoints}!`);
-    }
-
-    else {
-        console.log(`Looks like it's a tie! The final score is ${playerPoints} to ${computerPoints}!`);
-        
+    else if (computerPoints == 5 && computerPoints > playerPoints) {
+        results.innerText = (`Oh no! Looks like you lost the game! The final score is ${playerPoints} to ${computerPoints}!`);
     }
 }
 
-game()
+// Disable buttons once player or computer reach 5 points
+
+function gameOver() {
+    if (playerPoints == 5 || computerPoints == 5) {
+        document.getElementById("rock").disabled = true;
+        document.getElementById("paper").disabled = true;
+        document.getElementById("scissors").disabled = true;
+        document.getElementById("playAgain").style.display="block";
+        replay()
+    }
+}
+
+// Play again button
+function replay() {
+    const playAgain = document.getElementById("playAgain");
+    playAgain.innerHTML ="Play Again"
+    playAgain.addEventListener('click', () => {
+        location.reload()
+    })
+}
